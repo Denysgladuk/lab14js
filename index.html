@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .task {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Tasks</h1>
+
+    <div class="task">
+        <h2>1. Check if first character is uppercase</h2>
+        <input type="text" id="uppercaseInput" placeholder="Enter a string">
+        <button onclick="checkUpperCase()">Check</button>
+        <p class="result" id="uppercaseResult"></p>
+    </div>
+
+    <div class="task">
+        <h2>2. Validate Email</h2>
+        <input type="text" id="emailInput" placeholder="Enter an email">
+        <button onclick="checkEmail()">Validate</button>
+        <p class="result" id="emailResult"></p>
+    </div>
+
+    <div class="task">
+        <h2>3. Regex to find 'd' followed by 'b's followed by 'd'</h2>
+        <input type="text" id="regexInput" placeholder="Enter a string">
+        <button onclick="findDbD()">Find</button>
+        <p class="result" id="regexResult"></p>
+    </div>
+
+    <div class="task">
+        <h2>4. Swap two substrings</h2>
+        <input type="text" id="swapInput" placeholder="Enter a string with two words">
+        <button onclick="swapSubstrings()">Swap</button>
+        <p class="result" id="swapResult"></p>
+    </div>
+
+    <div class="task">
+        <h2>5. Validate Credit Card Number</h2>
+        <input type="text" id="cardInput" placeholder="Enter a card number">
+        <button onclick="validateCard()">Validate</button>
+        <p class="result" id="cardResult"></p>
+    </div>
+
+    <div class="task">
+        <h2>6. Advanced Email Validation</h2>
+        <input type="text" id="advancedEmailInput" placeholder="Enter an email">
+        <button onclick="advancedCheckEmail()">Validate</button>
+        <p class="result" id="advancedEmailResult"></p>
+    </div>
+
+    <div class="task">
+        <h2>7. Validate Login and Extract Numbers</h2>
+        <input type="text" id="loginInput" placeholder="Enter a login">
+        <button onclick="checkLogin()">Check</button>
+        <p class="result" id="loginResult"></p>
+    </div>
+
+    <script>
+        function checkUpperCase() {
+            const str = document.getElementById('uppercaseInput').value;
+            const result = /^[A-Z]/.test(str) ? 
+                "String's starts with uppercase character" : 
+                "String's not starts with uppercase character";
+            document.getElementById('uppercaseResult').textContent = result;
+        }
+
+        function checkEmail() {
+            const email = document.getElementById('emailInput').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const result = emailPattern.test(email) ? 
+                "Email is valid" : 
+                "Email is not valid";
+            document.getElementById('emailResult').textContent = result;
+        }
+
+        function findDbD() {
+            const str = document.getElementById('regexInput').value;
+            const regex = /d(b+)(d)/gi;
+            const result = str.match(regex);
+            document.getElementById('regexResult').textContent = result ? result.join(', ') : "No match found";
+        }
+
+        function swapSubstrings() {
+            const str = document.getElementById('swapInput').value;
+            const result = str.replace(/(\w+)\s+(\w+)/, '$2, $1');
+            document.getElementById('swapResult').textContent = result;
+        }
+
+        function validateCard() {
+            const cardNumber = document.getElementById('cardInput').value;
+            const cardPattern = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+            const result = cardPattern.test(cardNumber) ? 
+                "Card number is valid" : 
+                "Card number is not valid";
+            document.getElementById('cardResult').textContent = result;
+        }
+
+        function advancedCheckEmail() {
+            const email = document.getElementById('advancedEmailInput').value;
+            const emailPattern = /^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+            const result = emailPattern.test(email) && !/[-]{2,}/.test(email) ? 
+                "Email is correct!" : 
+                "Email is not correct!";
+            document.getElementById('advancedEmailResult').textContent = result;
+        }
+
+        function checkLogin() {
+            const login = document.getElementById('loginInput').value;
+            const loginPattern = /^[a-zA-Z][a-zA-Z0-9.]{1,9}$/;
+            const numbersPattern = /(\d+(\.\d+)?)/g;
+            const isValid = loginPattern.test(login);
+            const numbers = login.match(numbersPattern);
+            const result = isValid ? "Login is valid" : "Login is not valid";
+            document.getElementById('loginResult').textContent = result + (numbers ? `, Numbers: ${numbers.join(', ')}` : '');
+        }
+    </script>
+</body>
+</html>
